@@ -21,8 +21,7 @@
 
     <?php
     include('../config/db_connection.php');
-
-    // Ambil ID dari URL
+    
     if (!isset($_GET['id'])) {
         echo "<script>
           alert('ID tidak ditemukan!');
@@ -33,7 +32,6 @@
 
     $id = $_GET['id'];
 
-    // Ambil data lama dari database
     $stmt = $koneksi->prepare("SELECT * FROM tbl_skema WHERE Kd_skema = ?");
     $stmt->bind_param("s", $id);
     $stmt->execute();
@@ -48,14 +46,11 @@
         exit;
     }
 
-    // Proses ketika form dikirim
     if (isset($_POST['submit'])) {
         $kode = trim($_POST['kode']);
         $nama = trim($_POST['nama']);
         $jenis = trim($_POST['jenis']);
         $jml_unit = trim($_POST['jml_unit']);
-
-        // Cek apakah data tidak berubah
         if (
             $kode == $data['Kd_skema'] &&
             $nama == $data['Nm_skema'] &&
@@ -67,7 +62,6 @@
               window.location.href = '../certification.php';
             </script>";
         } else {
-            // Lakukan update
             $stmt_update = $koneksi->prepare("UPDATE tbl_skema SET Nm_skema=?, Jenis=?, Jml_unit=? WHERE Kd_skema=?");
             $stmt_update->bind_param("ssss", $nama, $jenis, $jml_unit, $kode);
             if ($stmt_update->execute()) {

@@ -88,7 +88,6 @@ if (isset($_POST['submit'])) {
     $alamat = trim($_POST['alamat']);
     $no_hp = trim($_POST['no_hp']);
 
-    // Cek apakah kombinasi id_peserta + kd_skema + nama_peserta sudah ada
     $cek_stmt = $koneksi->prepare("SELECT * FROM tbl_peserta WHERE Id_peserta = ? OR (Kd_skema = ? AND Nm_peserta = ?)");
     $cek_stmt->bind_param("sss", $id_peserta, $kd_skema, $nm_peserta);
     $cek_stmt->execute();

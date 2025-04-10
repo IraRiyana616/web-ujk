@@ -48,7 +48,6 @@
     exit;
   }
 
-  // Proses jika form disubmit
   if (isset($_POST['submit'])) {
     $kd_skema = trim($_POST['kd_skema']);
     $nm_peserta = trim($_POST['nm_peserta']);
@@ -56,7 +55,6 @@
     $alamat = trim($_POST['alamat']);
     $no_hp = trim($_POST['no_hp']);
 
-    // Update data
     $update_stmt = $koneksi->prepare("UPDATE tbl_peserta SET Kd_skema=?, Nm_peserta=?, Jekel=?, Alamat=?, No_hp=? WHERE Id_peserta=?");
     $update_stmt->bind_param("ssssss", $kd_skema, $nm_peserta, $jekel, $alamat, $no_hp, $id);
 
@@ -121,7 +119,6 @@
       <button type="submit" name="submit" class="btn-submit">Simpan Perubahan</button>
     </div>
   </form>
-
 </div>
 </body>
 </html>
